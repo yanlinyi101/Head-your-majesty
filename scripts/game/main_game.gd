@@ -1,5 +1,9 @@
 extends Node3D
 
+const EventLog := preload("res://scripts/util/event_log.gd")
+
+var event_log: EventLog
+
 @onready var match_controller: MatchController = $MatchController
 @onready var player: CharacterActor = $Player
 @onready var bot: CharacterActor = $Bot
@@ -9,6 +13,9 @@ extends Node3D
 var actors: Array[CharacterActor] = []
 
 func _ready() -> void:
+	event_log = EventLog.new()
+	add_child(event_log)
+	match_controller.event_log = event_log
 	actors = [player, bot]
 	for actor in actors:
 		match_controller.add_participant(actor.participant_id)
@@ -18,8 +25,12 @@ func _ready() -> void:
 	king_head.loosened.connect(match_controller.on_head_became_loose)
 	match_controller.score_changed.connect(func(_id, _score): hud.set_scores(match_controller.scores))
 	match_controller.carrier_changed.connect(hud.set_carrier)
-	match_controller.match_finished.connect(hud.show_result)
+	match_controller.match_finished.connect(_on_match_finished)
 	hud.set_scores(match_controller.scores)
+
+func _on_match_finished(result: Dictionary) -> void:
+	hud.show_result(result)
+	print("PHASE 1 MATCH SUMMARY: ", event_log.summary())
 
 func _process(_delta: float) -> void:
 	hud.set_time(match_controller.match_time_remaining)

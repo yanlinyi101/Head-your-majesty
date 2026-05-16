@@ -18,3 +18,10 @@ func count(event_type: String) -> int:
 
 func clear() -> void:
 	events.clear()
+
+func summary() -> Dictionary:
+	return {
+		"reversals": count("reversal"),
+		"match_finished": count("match_finished"),
+		"total_events": events.size()
+	}
