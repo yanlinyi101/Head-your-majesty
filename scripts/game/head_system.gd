@@ -67,3 +67,6 @@ func reset_to_drop() -> void:
 	angular_velocity = Vector3.ZERO
 	loose_seconds = 0.0
 	reset_to_center.emit()
+
+func can_pick_up(actor: Node3D) -> bool:
+	return state == State.LOOSE and global_position.distance_to(actor.global_position) <= Tuning.HEAD_PICKUP_RADIUS

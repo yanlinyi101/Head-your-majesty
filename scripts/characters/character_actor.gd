@@ -92,3 +92,9 @@ func _detect_severe_fall() -> void:
 	if up_dot < Tuning.FALL_KNOCKOFF_TILT_DOT:
 		_fall_knockoff_cooldown = Tuning.FALL_KNOCKOFF_COOLDOWN
 		severe_fall.emit(self)
+
+func is_lunging() -> bool:
+	return _lunge_time_remaining > 0.0
+
+func current_impact_strength() -> float:
+	return Vector2(velocity.x, velocity.z).length()
