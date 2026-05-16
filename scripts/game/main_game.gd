@@ -13,8 +13,13 @@ func _ready() -> void:
 		match_controller.add_participant(actor.participant_id)
 		actor.lunge_hit.connect(_on_lunge_hit)
 		actor.severe_fall.connect(_on_severe_fall)
-	king_head.worn.connect(match_controller.set_carrier)
+	king_head.worn.connect(_on_head_worn)
 	king_head.loosened.connect(match_controller.on_head_became_loose)
+
+func _on_head_worn(participant_id: String) -> void:
+	for candidate in actors:
+		candidate.set_carrier_enabled(candidate.participant_id == participant_id)
+	match_controller.set_carrier(participant_id)
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pickup_head") and king_head.can_pick_up(player):

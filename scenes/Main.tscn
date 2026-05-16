@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://heads_off_main"]
+[gd_scene load_steps=9 format=3 uid="uid://heads_off_main"]
 
 [ext_resource type="PackedScene" path="res://scenes/Arena.tscn" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/Character.tscn" id="2_character"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/game/match_controller.gd" id="4_match"]
 [ext_resource type="Script" path="res://scripts/characters/player_controller.gd" id="5_player_controller"]
 [ext_resource type="Script" path="res://scripts/game/main_game.gd" id="6_main_game"]
+[ext_resource type="Script" path="res://scripts/characters/bot_brain.gd" id="7_bot_brain"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("6_main_game")
@@ -42,3 +43,9 @@ camera_pivot_path = NodePath("../Player/CameraPivot")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.9, 0.4, 0.2)
+
+[node name="BotBrain" type="Node" parent="."]
+script = ExtResource("7_bot_brain")
+actor_path = NodePath("../Bot")
+player_path = NodePath("../Player")
+head_path = NodePath("../KingHead")
