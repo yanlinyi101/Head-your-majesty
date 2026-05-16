@@ -65,7 +65,7 @@ func _apply_movement(delta: float) -> void:
 	var target_velocity := desired_direction * speed
 	velocity.x = move_toward(velocity.x, target_velocity.x, Tuning.PLAYER_ACCELERATION * delta)
 	velocity.z = move_toward(velocity.z, target_velocity.z, Tuning.PLAYER_ACCELERATION * delta)
-	if desired_direction.length() > 0.01:
+	if is_bot and desired_direction.length() > 0.01:
 		var target_basis := Transform3D().looking_at(-desired_direction, Vector3.UP).basis
 		global_basis = global_basis.slerp(target_basis, clampf(Tuning.PLAYER_TURN_SPEED * delta, 0.0, 1.0))
 

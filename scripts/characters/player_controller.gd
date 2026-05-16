@@ -23,14 +23,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		actor.request_lunge()
 
 func _physics_process(_delta: float) -> void:
-	camera_pivot.rotation = Vector3(_pitch, _yaw, 0.0)
+	actor.rotation.y = _yaw
+	camera_pivot.rotation = Vector3(_pitch, 0.0, 0.0)
 	var input := Vector2.ZERO
 	input.y -= Input.get_action_strength("move_forward")
 	input.y += Input.get_action_strength("move_back")
 	input.x -= Input.get_action_strength("move_left")
 	input.x += Input.get_action_strength("move_right")
-	var forward := -camera_pivot.global_transform.basis.z
-	var right := camera_pivot.global_transform.basis.x
+	var forward := -actor.global_transform.basis.z
+	var right := actor.global_transform.basis.x
 	forward.y = 0.0
 	right.y = 0.0
 	var world_direction := (forward.normalized() * -input.y) + (right.normalized() * input.x)
