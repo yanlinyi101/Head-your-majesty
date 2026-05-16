@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://heads_off_main"]
+[gd_scene load_steps=7 format=3 uid="uid://heads_off_main"]
+
+[ext_resource type="PackedScene" path="res://scenes/Arena.tscn" id="1_arena"]
+[ext_resource type="PackedScene" path="res://scenes/Character.tscn" id="2_character"]
+[ext_resource type="PackedScene" path="res://scenes/KingHead.tscn" id="3_head"]
+[ext_resource type="Script" path="res://scripts/game/match_controller.gd" id="4_match"]
+[ext_resource type="Script" path="res://scripts/characters/player_controller.gd" id="5_player_controller"]
 
 [node name="Main" type="Node3D"]
+
+[node name="Arena" parent="." instance=ExtResource("1_arena")]
+
+[node name="MatchController" type="Node" parent="."]
+script = ExtResource("4_match")
+
+[node name="Player" parent="." instance=ExtResource("2_character")]
+participant_id = "player"
+position = Vector3(-3, 2, -3)
+
+[node name="Bot" parent="." instance=ExtResource("2_character")]
+participant_id = "bot_1"
+is_bot = true
+position = Vector3(3, 2, -3)
+
+[node name="KingHead" parent="." instance=ExtResource("3_head")]
+drop_origin = Vector3(0, 6, 0)
+
+[node name="CameraPivot" type="Node3D" parent="Player"]
+position = Vector3(0, 1.2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+position = Vector3(0, 3.2, 7)
+rotation = Vector3(-0.35, 0, 0)
+current = true
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("5_player_controller")
+actor_path = NodePath("../Player")
+camera_pivot_path = NodePath("../Player/CameraPivot")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, 0.4, 0.2)

@@ -82,3 +82,6 @@ func _build_result() -> Dictionary:
 func _record(event_type: String, payload: Dictionary) -> void:
 	if event_log != null and event_log.has_method("record"):
 		event_log.record(event_type, payload)
+
+func _process(delta: float) -> void:
+	advance_match_time(delta)

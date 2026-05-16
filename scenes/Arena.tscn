@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://heads_off_arena"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_platform"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_platform"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ramp"]
+size = Vector3(3, 0.35, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ramp"]
+size = Vector3(3, 0.35, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall"]
+size = Vector3(1, 2, 18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall"]
+size = Vector3(1, 2, 18)
+
+[node name="Arena" type="Node3D"]
+
+[node name="CentralPlatform" type="StaticBody3D" parent="."]
+position = Vector3(0, 1.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CentralPlatform"]
+shape = SubResource("BoxShape3D_platform")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CentralPlatform"]
+mesh = SubResource("BoxMesh_platform")
+
+[node name="LowerPlatform" type="StaticBody3D" parent="."]
+position = Vector3(0, 0, 8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowerPlatform"]
+shape = SubResource("BoxShape3D_platform")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowerPlatform"]
+mesh = SubResource("BoxMesh_platform")
+
+[node name="RampA" type="StaticBody3D" parent="."]
+position = Vector3(-3.25, 0.65, 4)
+rotation = Vector3(-0.22, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RampA"]
+shape = SubResource("BoxShape3D_ramp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RampA"]
+mesh = SubResource("BoxMesh_ramp")
+
+[node name="RampB" type="StaticBody3D" parent="."]
+position = Vector3(3.25, 0.65, 4)
+rotation = Vector3(-0.22, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RampB"]
+shape = SubResource("BoxShape3D_ramp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RampB"]
+mesh = SubResource("BoxMesh_ramp")
+
+[node name="HeadDropPoint" type="Marker3D" parent="."]
+position = Vector3(0, 6, 0)
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+position = Vector3(-3, 2, -3)
+
+[node name="BotSpawn" type="Marker3D" parent="."]
+position = Vector3(3, 2, -3)
