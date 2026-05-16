@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://heads_off_king_head"]
+
+[ext_resource type="Script" path="res://scripts/game/head_system.gd" id="1_head"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_head"]
+radius = 0.45
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+radius = 0.45
+height = 0.9
+
+[node name="KingHead" type="RigidBody3D"]
+script = ExtResource("1_head")
+mass = 1.2
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_head")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_head")
