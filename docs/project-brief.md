@@ -4,7 +4,7 @@
 > 类型：单场景高密度物理派对小品  
 > 当前目标：用一个可控小项目验证美术资产、Godot 3D 技术路径、物理喜剧手感和 Steam 题材吸引力。
 >
-> **GitHub 仓库**: https://github.com/yanlinyi101/Head-youryour-majemajesty
+> **GitHub 仓库**: https://github.com/yanlinyi101/head-your-majesty
 
 ---
 

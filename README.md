@@ -1,6 +1,6 @@
 # Heads Off Party (Head, Your Majesty)
 
-**GitHub**: https://github.com/yanlinyi101/Head-youryour-majemajesty
+**GitHub**: https://github.com/yanlinyi101/head-your-majesty
 
 单场景高密度物理派对小品 — 四个没头角色在革命后的巴黎广场抢各种脑袋，戴上"国王头"坚持最久者获胜。
 
