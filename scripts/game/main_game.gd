@@ -4,6 +4,7 @@ extends Node3D
 @onready var player: CharacterActor = $Player
 @onready var bot: CharacterActor = $Bot
 @onready var king_head: HeadSystem = $KingHead
+@onready var hud: CanvasLayer = $HUD
 
 var actors: Array[CharacterActor] = []
 
@@ -15,6 +16,14 @@ func _ready() -> void:
 		actor.severe_fall.connect(_on_severe_fall)
 	king_head.worn.connect(_on_head_worn)
 	king_head.loosened.connect(match_controller.on_head_became_loose)
+	match_controller.score_changed.connect(func(_id, _score): hud.set_scores(match_controller.scores))
+	match_controller.carrier_changed.connect(hud.set_carrier)
+	match_controller.match_finished.connect(hud.show_result)
+	hud.set_scores(match_controller.scores)
+
+func _process(_delta: float) -> void:
+	hud.set_time(match_controller.match_time_remaining)
+	hud.set_pickup_visible(king_head.can_pick_up(player))
 
 func _on_head_worn(participant_id: String) -> void:
 	for candidate in actors:
